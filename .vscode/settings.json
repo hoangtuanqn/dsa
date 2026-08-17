@@ -1,3 +1,9 @@
 {
-    "terminal.integrated.defaultProfile.windows": "Command Prompt"
+    "terminal.integrated.defaultProfile.windows": "Command Prompt",
+    "code-runner.executorMap": {
+        "cpp": "cd $dir && g++ -std=c++20 $fileName -o $fileNameWithoutExt.exe && $dir$fileNameWithoutExt.exe"
+    },
+    "code-runner.runInTerminal": true,
+    "code-runner.saveFileBeforeRun": true,
+    "java.search.scope": "main"
 }
