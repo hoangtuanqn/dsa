@@ -5,37 +5,30 @@
 using namespace std;
 void merge(vector<int> &n1, int n, vector<int> &n2, int m)
 {
-    int i = 0, j = 0, k = 0;
-    int n3[n + m];
-    while (i < n && j < m && k < m + n)
+    int i = n - 1, j = m - 1, k = m + n - 1;
+    while (k >= 0)
     {
-        if (n1[i] <= n2[j])
+        if (j < 0)
         {
-            n3[k] = n1[i];
-            i++;
+            n1[k] = n1[i];
+            i--;
+        }
+        else if (i < 0)
+        {
+            n1[k] = n2[j];
+            j--;
+        }
+        else if (n1[i] > n2[j])
+        {
+            n1[k] = n1[i];
+            i--;
         }
         else
         {
-            n3[k] = n2[j];
-            j++;
+            n1[k] = n2[j];
+            --j;
         }
-        ++k;
-    }
-    for (; i < n; ++i)
-    {
-        n3[k] = n1[i];
-
-        ++k;
-    }
-    for (; j < m; ++j)
-    {
-        n3[k] = n2[j];
-        ++k;
-    }
-    // n1 = move(n3);
-    FOR(i, 0, k)
-    {
-        n1[i] = n3[i];
+        k--;
     }
 }
 int main()
