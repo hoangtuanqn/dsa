@@ -1,30 +1,30 @@
 #include <bits/stdc++.h>
+#define FOR(i, a, b) for (int i = (a); i < (b); ++i)
 using namespace std;
-void insertElement(int ai, int pos, vector<int> &nums1, int &n)
+void insertElement(vector<int> &n1, int &n, int value, int pos)
 {
     for (int i = n; i > pos; --i)
     {
-        nums1[i] = nums1[i - 1];
+        n1[i] = n1[i - 1];
     }
-    nums1[pos] = ai;
-    n++;
+    n1[pos] = value;
+    ++n;
 }
-int findIndexCanInsert(vector<int> &n1, int n, int n2i)
+int findIndexInsert(vector<int> &n1, int n, int value)
 {
-    bool isFind = false;
-    for (int i = 0; i < n; ++i)
+    FOR(i, 0, n)
     {
-        if (n1[i] > n2i)
+        if (n1[i] > value)
             return i;
     }
     return n;
 }
 void merge(vector<int> &n1, int n, vector<int> &n2, int m)
 {
-    for (int i = 0; i < m; ++i)
+    FOR(i, 0, m)
     {
-        int k = findIndexCanInsert(n1, n, n2[i]);
-        insertElement(n2[i], k, n1, n);
+        int k = findIndexInsert(n1, n, n2[i]);
+        insertElement(n1, n, n2[i], k);
     }
 }
 int main()
@@ -34,7 +34,7 @@ int main()
     cout.tie(0);
 
     vector<int> a = {1, 2, 3, 0, 0, 0};
-    vector<int> b = {2, 3, 3};
+    vector<int> b = {2, 5, 6};
     merge(a, 3, b, 3);
     for (auto val : a)
     {
