@@ -1,5 +1,4 @@
-// 27. Remove Element
-// Sử dụng 2 con trỏ
+// 1672. Richest Customer Wealth
 #include <bits/stdc++.h>
 #define FOR(i, a, b) for (int i = (a); i < (b); ++i)
 using namespace std;
