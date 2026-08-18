@@ -19,7 +19,7 @@ int removeElement(vector<int> &nums, int val)
             count++;
         }
     }
-    return nums.size() - count;
+    return k;
 }
 int main()
 {
