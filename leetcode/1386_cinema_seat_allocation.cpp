@@ -9,6 +9,7 @@ int maxNumberOfFamilies(int n, vector<vector<int>> &reservedSeats)
     unordered_map<int, vector<bool>> matrix;
     for (auto &s : reservedSeats)
     {
+        // Có lời giải thích 1386_cinema_seat_allocation_solution_2_optimize.md
         int k = s[0], v = s[1];
         if (!matrix.count(k))
             matrix[k] = vector<bool>(11, false);
