@@ -4,33 +4,30 @@
 using namespace std;
 void duplicateZeros(vector<int> &arr)
 {
-    int write_pos = 0, total = 0, pos = 0;
-    bool last_zero_truncated = false;
-    FOR(i, 0, arr.size())
+    int usage = 0, pos = 0;
+    while (usage < arr.size())
     {
-        total += arr[i] == 0 ? 2 : 1;
-        if (total >= arr.size())
-        {
-            last_zero_truncated = total > arr.size();
-            pos = i;
-            break;
-        }
+        usage += arr[pos++] == 0 ? 2 : 1;
     }
+    bool last_zero_truncated = (usage - 1) == arr.size();
+    pos--;
     int j = arr.size() - 1;
+    if (last_zero_truncated)
+    {
+        arr[j--] = 0;
+        pos--;
+    }
     for (int i = pos; i >= 0; --i)
     {
         if (arr[i] == 0)
         {
-            arr[j] = 0;
-            if (!(last_zero_truncated && i == pos))
-            {
-                j--;
-                arr[j] = 0;
-            }
+            arr[j] = arr[j - 1] = 0;
+            j -= 2;
         }
         else
-            arr[j] = arr[i];
-        j--;
+        {
+            arr[j--] = arr[i];
+        }
     }
 }
 int main()
