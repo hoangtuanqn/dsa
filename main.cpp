@@ -3,18 +3,24 @@ using namespace std;
 #define FOR(i, a, b) for (int i = (a); i < (b); ++i)
 #define ll long long
 #define vii vector<int, int>
-string mergeAlternately(string word1, string word2)
+char findTheDifference(string s, string t)
 {
-    string rs;
-    int i = 0, j = 0;
-    while (i < word1.size() || j < word2.size())
+    int val[26] = {0};
+    int n = s.size();
+    FOR(i, 0, n)
     {
-        if (i < word1.size())
-            rs += word1[i++];
-        if (j < word2.size())
-            rs += word2[j++];
+        val[s[i] - 'a']++;
     }
-    return rs;
+    FOR(i, 0, n + 1)
+    {
+        val[t[i] - 'a']--;
+        if (val[t[i] - 'a'] == -1)
+        {
+            return t[i];
+        }
+    }
+
+    return '\0';
 }
 int main()
 {
@@ -22,7 +28,6 @@ int main()
     cin.tie(0);
     cout.tie(0);
 
-    vector<int> arr = {1, 8, 6, 2, 5, 4, 8, 3, 7};
-    cout << mergeAlternately("abc", "pqrrr");
+    cout << findTheDifference("", "y");
     return 0;
 }

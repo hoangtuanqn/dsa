@@ -3,24 +3,26 @@ using namespace std;
 #define FOR(i, a, b) for (int i = (a); i < (b); ++i)
 #define ll long long
 #define vii vector<int, int>
-char findTheDifference(string s, string t)
+int strStr(string haystack, string needle)
 {
-    int val[26] = {0};
-    int n = s.size();
-    FOR(i, 0, n)
+    int n = haystack.size(), m = needle.size();
+    if (n < m)
+        return -1;
+    for (int start = 0; start <= n - m; ++start)
     {
-        val[s[i] - 'a']++;
-    }
-    FOR(i, 0, n + 1)
-    {
-        val[t[i] - 'a']--;
-        if (val[t[i] - 'a'] == -1)
+        bool matched = true;
+        for (int l = start; l < start + m; ++l)
         {
-            return t[i];
+            if (haystack[l] != needle[l - start])
+            {
+                matched = false;
+                break;
+            }
         }
+        if (matched)
+            return start;
     }
-
-    return '\0';
+    return -1;
 }
 int main()
 {
@@ -28,6 +30,6 @@ int main()
     cin.tie(0);
     cout.tie(0);
 
-    cout << findTheDifference("", "y");
+    cout << strStr("a", "a");
     return 0;
 }
