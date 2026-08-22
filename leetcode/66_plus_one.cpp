@@ -7,9 +7,8 @@ vector<int> plusOne(vector<int> &digits)
 {
     int n = digits.size();
     int memo = 1;
-    int i = n - 1;
 
-    while (memo && i >= 0)
+    for (int i = n - 1; i >= 0 && memo; --i)
     {
         if (digits[i] + memo >= 10)
         {
@@ -21,7 +20,6 @@ vector<int> plusOne(vector<int> &digits)
             digits[i] += memo;
             memo = 0;
         }
-        --i;
     }
     if (memo)
     {
