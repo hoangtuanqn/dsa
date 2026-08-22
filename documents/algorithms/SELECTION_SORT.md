@@ -1,6 +1,6 @@
 ## Selection Sort — Nguyên lý
 
-Ý tưởng cốt lõi: **chia mảng thành 2 phần — đã sorted (trái) và chưa sorted (phải). Mỗi vòng lặp, tìm phần tử nhỏ nhất trong phần chưa sorted, đưa về cuối phần đã sorted.**
+Ý tưởng cốt lõi: **chia mảng thành 2 phần — đã sorted (trái) và chưa sorted (phải). Mỗi vòng lặp, tìm phần tử nhỏ nhất trong phần chưa sorted, đưa về cuối phần đã sorted.** Hoặc nói cách khác, đưa phần tử **về đầu phần chưa được sorted**.
 
 ```
 [5, 3, 8, 1, 2]
