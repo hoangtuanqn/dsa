@@ -3,6 +3,8 @@ using namespace std;
 #define FOR(i, a, b) for (int i = (a); i < (b); ++i)
 #define ll long long
 #define vii vector<int, int>
+
+// Có hd ở: 5_longest_palindromic_substring_using_expansion_from_center.md
 string longestPalindrome(string s) {
     int startI = 0, maxLength = 1;
     int n = s.size();
