@@ -3,6 +3,8 @@ using namespace std;
 #define FOR(i, a, b) for (int i = (a); i < (b); ++i)
 #define ll long long
 #define vii vector<int, int>
+
+// sử dụng DP
 string longestPalindrome(string s)
 {
     int n = s.size(), maxLenght = 1, start = 0;
