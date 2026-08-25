@@ -52,6 +52,7 @@ Lomuto dùng con trỏ `i` đánh dấu biên vùng "đã biết ≤ pivot", qu�
 
 **Điểm cực kỳ quan trọng — pitfall lớn nhất khi tự cài Hoare:**
 - Hàm trả về `j`, **không phải vị trí cuối cùng của pivot** (khác hẳn Lomuto).
+    - Đảm bảo rằng mọi phần tử trong `[lo, j]` ≤ pivot, mọi phần tử trong `[j+1, hi]` ≥ pivot.
 - Đệ quy tiếp phải chia thành `[lo, j]` và `[j+1, hi]` — **không phải** `[lo, j-1]` và `[j+1, hi]` như code Lomuto-style. Đây là lỗi 90% người mới tự implement Hoare gặp phải, gây sai kết quả hoặc vòng lặp vô hạn.
 
 **Walk-through cụ thể**, mảng `a = [8, 3, 5, 4, 7, 6, 1, 2]`, `lo=0, hi=7`. Giả sử pivot chọn tạm = `a[0] = 8` để dễ nhìn cơ chế (thực tế sẽ dùng median-of-three, nói ở bước sau):
