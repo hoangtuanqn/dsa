@@ -3,6 +3,8 @@ using namespace std;
 #define FOR(i, a, b) for (int i = (a); i < (b); ++i)
 #define ll long long
 #define vii vector<int, int>
+// có lời giải chi tiết ở: "132_palindrome_partitioning_II_using_DP.md", đây là biến thể từ bài xâu con đối xứng dài
+// nhất
 vector<vector<bool>> buildDP(const string& s) {
     int n = s.size();
     vector<vector<bool>> p = vector(n, vector<bool>(n, false));
