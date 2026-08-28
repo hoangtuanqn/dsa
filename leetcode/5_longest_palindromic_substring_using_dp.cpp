@@ -7,7 +7,7 @@ using namespace std;
 // sử dụng DP
 string longestPalindrome(string s)
 {
-    int n = s.size(), maxLenght = 1, start = 0;
+    int n = s.size(), maxLength = 1, start = 0;
     vector<vector<bool>>
         dp(n, vector<bool>(n, false));
     dp[n - 1][n - 1] = true;
@@ -16,7 +16,7 @@ string longestPalindrome(string s)
         if (s[i] == s[i + 1])
         {
             dp[i][i + 1] = true;
-            maxLenght = 2;
+            maxLength = 2;
             start = i;
         }
         dp[i][i] = true;
@@ -29,15 +29,15 @@ string longestPalindrome(string s)
             if (s[i] == s[j] && dp[i + 1][j - 1])
             {
                 dp[i][j] = true;
-                if (len > maxLenght)
+                if (len > maxLength)
                 {
-                    maxLenght = len;
+                    maxLength = len;
                     start = i;
                 }
             }
         }
     }
-    return s.substr(start, maxLenght);
+    return s.substr(start, maxLength);
 }
 int main()
 {
