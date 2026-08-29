@@ -3,6 +3,7 @@ using namespace std;
 #define FOR(i, a, b) for (int i = (a); i < (b); ++i)
 #define ll long long
 #define vii vector<int, int>
+// lời giải thích: 32_longest_valid_parentheses.md
 int longestValidParentheses(string s) {
     stack<int> stack;
     int ans = 0;
