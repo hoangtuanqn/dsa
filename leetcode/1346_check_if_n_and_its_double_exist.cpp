@@ -1,6 +1,5 @@
 #include <bits/stdc++.h>
 #include <algorithm>
-#include <unordered_map>
 using namespace std;
 #define FOR(i, a, b) for (int i = (a); i < (b); ++i)
 #define ll long long
@@ -22,7 +21,7 @@ int main() {
     ios::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
-    vector<int> arr = {3,1,7,11};
+    vector<int> arr = {3, 1, 7, 11};
     cout << checkIfExist(arr);
     return 0;
 }
