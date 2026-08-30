@@ -16,11 +16,11 @@ int median_of_three(vi& nums, int l, int r) {
         swap(nums[m], nums[r]);
     return nums[m];
 }
-void three_way_partition(vi& nums, int l, int r, int& lt, int& gt) {
+pair<int, int> three_way_partition(vi& nums, int l, int r) {
     int pivot = median_of_three(nums, l, r);
     int i = l;
-    lt = l;
-    gt = r;
+    int lt = l;
+    int gt = r;
     while (i <= gt) {
         if (nums[i] < pivot) {
             swap(nums[lt], nums[i]);
@@ -33,12 +33,12 @@ void three_way_partition(vi& nums, int l, int r, int& lt, int& gt) {
             ++i;
         }
     }
+    return {lt, gt};
 }
 int quickselect(vi& nums, int l, int r, int k) {
     if (l == r)
         return nums[l];
-    int lt, gt;
-    three_way_partition(nums, l, r, lt, gt);
+    auto [lt, gt] = three_way_partition(nums, l, r);
     if (k < lt) {
         return quickselect(nums, l, lt - 1, k);
     } else if (k > gt) {
