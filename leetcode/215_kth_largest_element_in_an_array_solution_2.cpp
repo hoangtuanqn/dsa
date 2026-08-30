@@ -4,6 +4,8 @@ using namespace std;
 #define vi vector<int>
 #define ll long long
 #define vii vector<pair<int, int>>
+
+// using 3-way partition (DNF Algo)
 int three_way_partition(vi& arr, int l, int r, int& lt, int& gt) {
     int m = l + (r - l) / 2;
     if (arr[l] > arr[m])
