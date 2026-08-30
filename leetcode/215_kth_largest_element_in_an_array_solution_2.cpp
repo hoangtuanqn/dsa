@@ -6,43 +6,45 @@ using namespace std;
 #define vii vector<pair<int, int>>
 
 // using 3-way partition (DNF Algo)
-int three_way_partition(vi& arr, int l, int r, int& lt, int& gt) {
+int median_of_three(vi& nums, int l, int r) {
     int m = l + (r - l) / 2;
-    if (arr[l] > arr[m])
-        swap(arr[l], arr[m]);
-    if (arr[l] > arr[r])
-        swap(arr[l], arr[r]);
-    if (arr[m] > arr[r])
-        swap(arr[m], arr[r]);
-    int pivot = arr[m];
+    if (nums[l] > nums[m])
+        swap(nums[l], nums[m]);
+    if (nums[l] > nums[r])
+        swap(nums[l], nums[r]);
+    if (nums[m] > nums[r])
+        swap(nums[m], nums[r]);
+    return nums[m];
+}
+void three_way_partition(vi& nums, int l, int r, int& lt, int& gt) {
+    int pivot = median_of_three(nums, l, r);
     int i = l;
     lt = l;
     gt = r;
     while (i <= gt) {
-        if (arr[i] < pivot) {
-            swap(arr[lt], arr[i]);
-            ++lt;
+        if (nums[i] < pivot) {
+            swap(nums[lt], nums[i]);
             ++i;
-        } else if (arr[i] > pivot) {
-            swap(arr[gt], arr[i]);
+            ++lt;
+        } else if (nums[i] > pivot) {
+            swap(nums[gt], nums[i]);
             --gt;
         } else {
             ++i;
         }
     }
-    return INT_MAX;
 }
-int quickselect(vi& arr, int l, int r, int k) {
+int quickselect(vi& nums, int l, int r, int k) {
     if (l == r)
-        return arr[l];
+        return nums[l];
     int lt, gt;
-    three_way_partition(arr, l, r, lt, gt);
+    three_way_partition(nums, l, r, lt, gt);
     if (k < lt) {
-        return quickselect(arr, l, lt - 1, k);
+        return quickselect(nums, l, lt - 1, k);
     } else if (k > gt) {
-        return quickselect(arr, gt + 1, r, k);
+        return quickselect(nums, gt + 1, r, k);
     } else {
-        return arr[gt];
+        return nums[lt];
     }
 }
 int findKthLargest(vector<int>& nums, int k) {
@@ -54,7 +56,7 @@ int main() {
     cin.tie(0);
     cout.tie(0);
     vi arr = {3, 2, 3, 1, 2, 4, 5, 5, 6};
-    int k = 4;  // ĐA: 2
-    cout << findKthLargest(arr, k);
+    int k = 4;
+    cout << findKthLargest(arr, k);  // 4;
     return 0;
 }
