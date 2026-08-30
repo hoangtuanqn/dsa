@@ -1,34 +1,34 @@
 #include <bits/stdc++.h>
-#include <algorithm>
-#include <unordered_map>
 using namespace std;
 #define FOR(i, a, b) for (int i = (a); i < (b); ++i)
+#define vi vector<int>
 #define ll long long
-#define vii vector<int, int>
-// gọi freq[i] là số lượng số nhỏ hơn i + 1. Ví dụ freq[5]= 20 là có 20 số nhỏ hơn 6.
-vector<int> smallerNumbersThanCurrent(vector<int>& nums) {
-    int freq[102] = {0};
-    vector<int> ans;
-    ans.reserve(nums.size());
-    cout << ans.size() << endl;
-    for (int x : nums)
-        freq[x]++;
-    for (int i = 1; i <= 101; ++i) {
-        freq[i] += freq[i - 1];
+#define vii vector<pair<int, int>>
+void sortColors(vi& arr) {
+    int n = arr.size();
+    int l = 0, m = 0, h = n - 1;
+    while (m <= h) {
+        if (arr[m] == 0) {
+            swap(arr[l], arr[m]);
+            m++;
+            l++;
+        } else if (arr[m] == 1) {
+            m++;
+        } else {
+            swap(arr[h], arr[m]);
+            h--;
+        }
     }
-    for (int x : nums) {
-        ans.push_back(x == 0 ? 0 : freq[x - 1]);
-    }
-    return ans;
 }
+sortColors
 int main() {
     ios::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
-    vector<int> arr = {8, 1, 2, 2, 3};
-    for (auto x : smallerNumbersThanCurrent(arr)) {
+    vi arr = {1, 0, 2, 2, 1, 1, 0, 0, 0};
+    dutch_national_flag(arr);
+    for (auto& x : arr)
         cout << x << " ";
-    }
 
     return 0;
 }
