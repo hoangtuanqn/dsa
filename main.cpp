@@ -1,4 +1,3 @@
-#include <unordered_map>
 #pragma GCC optimize("O2")
 #pragma GCC optimize("unroll-loops")
 #pragma GCC target("avx2")
@@ -43,19 +42,18 @@ const ll LINF = 1e18;
 const int MOD = 1e9 + 7;
 
 // ====== SOLUTION
-bool isAnagram(string s, string t) {
-    if (t.size() != s.size())
-        return false;
-    unordered_map<char, int> map;
-    FOR(i, 0, s.size()) {
-        map[s[i]]++;
+vector<vector<string>> groupAnagrams(vector<string>& strs) {
+    vector<vector<string>> ans;
+    unordered_map<string, vector<string>> map;
+    FOR(i, 0, strs.size()) {
+        string temp = strs[i];
+        sort(temp.begin(), temp.end());
+        map[temp].push_back(strs[i]);
     }
-    FOR(i, 0, t.size()) {
-        map[t[i]]--;
-        if (map[t[i]] < 0)
-            return false;
+    for (auto& v : map) {
+        ans.push_back(v.second);
     }
-    return true;
+    return ans;
 }
 int main() {
     ios::sync_with_stdio(0);
