@@ -143,6 +143,33 @@ Nếu cur là head: head = cur->next  (prev == nullptr lúc này)
 Nếu cur là tail: tail = prev
 ```
 
+**Delete tại vị trí idx — O(n):**
+
+3 trường hợp cần xử lý riêng:
+
+```
+Muốn xóa index 2:
+head → [10] → [20] → [30] → [40] → NULL
+                      ↑
+                    idx=2
+
+Bước 1: traverse đến idx-1, gọi là prev → dừng tại [20]
+Bước 2: cur = prev->next → cur là [30]
+Bước 3: prev->next = cur->next    →  [20] → [40]
+Bước 4: delete cur
+
+Sau: head → [10] → [20] → [40] → NULL
+```
+
+Tại sao traverse đến `idx-1` chứ không phải `idx`? Vì cần **node trước** vị trí xóa để nối lại chain — không có pointer ngược, không thể quay lui.
+
+Edge case:
+```
+idx == 0      → dùng pop_front() — prev sẽ là nullptr, không có node trước
+idx == sz-1   → dùng pop_back()  — cur->next sẽ là nullptr, tail cần update
+idx >= sz     → out of range, return false
+```
+
 ---
 
 ### Search — O(n)
@@ -294,6 +321,31 @@ class SinglyLinkedList {
         sz--;
         return true;
     }
+    
+    // Xóa phần tử tại vị trí idx
+     bool deleteAtPosition(int idx) {
+        if (idx < 0 || idx >= sz)
+            return false;
+        if (idx == 0) {
+            pop_front();
+            return true;
+        }
+        if (idx == sz - 1) {
+            pop_back();
+            return true;
+        }
+        Node* prev = nullptr;
+        Node* cur = head;
+        for (int i = 0; i < idx && cur; ++i) {
+            prev = cur;
+            cur = cur->next;
+        }
+        prev->next = cur->next;
+        delete cur;
+        --sz;
+        return true;
+    }
+
 
     // xóa node đầu tiên có val == v
     bool remove(int v) {
@@ -395,6 +447,7 @@ g++ -std=c++20 -O2 -Wall -Wextra -o sll main.cpp
 | `insert(idx)` | O(n) | O(1) | Traverse đến `idx-1` |
 | `pop_front` | O(1) | O(1) | Chỉ thao tác với `head` |
 | `pop_back` | **O(n)** | O(1) | Không có pointer ngược → traverse tìm node trước `tail` |
+| `deleteAtPosition(v)` | O(n) | O(1) | raverse đến `idx-1` |
 | `remove(v)` | O(n) | O(1) | Search theo value |
 | `find` | O(n) | O(1) | Không có index, không có shortcut |
 | `reverse` | O(n) | O(1) | Một lần traverse duy nhất |
