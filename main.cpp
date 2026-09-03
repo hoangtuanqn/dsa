@@ -54,21 +54,16 @@ struct ListNode {
     }
 };
 ListNode* removeElements(ListNode* head, int val) {
-    ListNode* prev = nullptr;
-    ListNode* cur = head;
-    while (cur) {
-        if (cur->val == val) {
-            if (prev) {
-                prev->next = cur->next;
-            } else {
-                head = cur->next;
-            }
+    ListNode dummy(0, head);
+    ListNode* cur = &dummy;
+    while (cur->next) {
+        if (cur->next->val == val) {
+            cur->next = cur->next->next;
         } else {
-            prev = cur;
+            cur = cur->next;
         }
-        cur = cur->next;
     }
-    return head;
+    return dummy.next;
 }
 void print(ListNode* head) {
     while (head) {
@@ -92,7 +87,7 @@ int main() {
     ios::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
-    ListNode* head = build({1,2,6,3,4,5,6});
+    ListNode* head = build({1, 2, 6, 3, 4, 5, 6});
     // ListNode* n1 = new ListNode(6);
     // ListNode* n2 = new ListNode(7);
     // ListNode* n3 = new ListNode(8);
