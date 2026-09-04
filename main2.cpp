@@ -42,28 +42,53 @@ const ll LINF = 1e18;
 const int MOD = 1e9 + 7;
 
 // ====== SOLUTION
-int binary_search(vector<int>& nums, int target) {
-    int l = 0, r = nums.size() - 1;
-    while (l <= r) {
-        int m = l + (r - l) / 2;
-        if (nums[m] == target)
-            return m;
-        else if (nums[m] > target)
-            r = m - 1;
-        else
-            l = m + 1;
+struct ListNode {
+    int val;
+    ListNode* next;
+    ListNode() : val(0), next(nullptr) {
     }
-    return l;
+    ListNode(int x) : val(x), next(nullptr) {
+    }
+    ListNode(int x, ListNode* next) : val(x), next(next) {
+    }
+};
+ListNode* buildNode(vector<int> arr) {
+    ListNode dummy;
+    ListNode* cur = &dummy;
+    for (int& x : arr) {
+        cur->next = new ListNode(x);
+        cur = cur->next;
+    }
+    return dummy.next;
 }
-int searchInsert(vector<int>& nums, int target) {
-    return binary_search(nums, target);
+ListNode* removeNthFromEnd(ListNode* head, int n) {
+    ListNode dummy(0, head);
+    ListNode* slow = &dummy;
+    ListNode* fast = &dummy;
+    FOR(i, 0, n) {
+        fast = fast->next;
+    }
+    while (fast->next != nullptr) {
+        slow = slow->next;
+        fast = fast->next;
+    }
+
+    slow->next = slow->next->next;
+    return dummy.next;
+}
+void print(ListNode* head) {
+    while (head) {
+        cout << head->val << " ";
+        head = head->next;
+    }
+    cout << "nullptr";
 }
 int main() {
     ios::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
-    vector<int> arr = {1, 3, 5, 6};
-    int target = 2;
-    cout << searchInsert(arr, target);
+    ListNode* head = buildNode({1});
+    head = removeNthFromEnd(head, 1);
+    print(head);
     return 0;
 }
