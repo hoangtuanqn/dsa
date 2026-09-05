@@ -1,4 +1,3 @@
-#include <algorithm>
 #pragma GCC optimize("O2")
 #pragma GCC optimize("unroll-loops")
 #pragma GCC target("avx2")
@@ -46,25 +45,19 @@ const int MOD = 1e9 + 7;
 
 class RecentCounter {
    private:
-    vector<int> p;
-    int n = 0;
-    int l = 0;
+    queue<int> q;
 
    public:
     RecentCounter() {
-        ios::sync_with_stdio(0);
-        cin.tie(0);
-        cout.tie(0);
     }
 
     int ping(int t) {
-        ++n;
-        p.push_back(t);
+        q.push(t);
         int x = t - 3000;
-        while (l < n && p[l] < x) {
-            ++l;
+        while (!q.empty() && q.front() < x) {
+            q.pop();
         }
-        return n - l;
+        return q.size();
     }
 };
 
@@ -75,7 +68,7 @@ int main() {
     RecentCounter* rc = new RecentCounter();
     cout << rc->ping(1) << endl;
     cout << rc->ping(100) << endl;
+    cout << rc->ping(3000) << endl;
     cout << rc->ping(3001) << endl;
-    cout << rc->ping(3002) << endl;
     return 0;
 }
