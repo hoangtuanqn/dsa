@@ -44,9 +44,9 @@ const int MOD = 1e9 + 7;
 
 // ====== SOLUTION
 int firstStableIndex(vector<int>& nums, int k) {
-    map<int, int> largest;
-    map<int, int> smallest;
     int n = nums.size();
+    vector<int> largest(n, 0);
+    vector<int> smallest(n, 0);
     smallest[n - 1] = nums[n - 1];
     for (int i = n - 2; i >= 0; --i) {
         smallest[i] = min(nums[i], smallest[i + 1]);
