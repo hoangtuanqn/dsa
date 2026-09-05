@@ -42,39 +42,9 @@ const ll LINF = 1e18;
 const int MOD = 1e9 + 7;
 
 // ====== SOLUTION
-struct ListNode {
-    int val;
-    ListNode* next;
-    ListNode(int x) : val(x), next(NULL) {
-    }
-};
-ListNode* detectCycle(ListNode* head) {
-    ListNode* slow = head;
-    ListNode* fast = head;
-    while (fast != nullptr && fast->next != nullptr) {
-        slow = slow->next;
-        fast = fast->next->next;
-        if (slow == fast) {
-            slow = head;
-        }
-        while (slow != fast) {
-            slow = slow->next;
-            fast = fast->next;
-        }
-        return slow;
-    }
-    return nullptr;
-}
-
-// void print(Node* head) {
-//     for (Node* cur = head; cur; cur = cur->next) {
-//         cout << cur->val << " ";
-//     }
-// }
 int main() {
     ios::sync_with_stdio(0);
     cin.tie(0);
-    cout.tie(0);
-   
+
     return 0;
 }
